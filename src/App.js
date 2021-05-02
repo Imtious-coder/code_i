@@ -1,28 +1,16 @@
 import { Layout, Menu, Table } from 'antd';
-import { MailOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { MailOutlined, AppstoreOutlined, DingdingOutlined, BugOutlined } from '@ant-design/icons';
 import './App.css';
 import 'antd/dist/antd.css';
 import { useState } from 'react';
 import { isMAC } from 'getmac';
 
 import {
-  isIOS,
-  isChrome,
-  isFirefox,
-  isSafari,
-  isOpera,
-  isIE,
-  isEdge,
-  isMobileSafari,
+  osVersion,
+  deviceType,
   browserVersion,
   browserName,
-  mobileVendor,
-  mobileModel,
-  engineVersion,
-  engineName,
-  OsTypes,
-  deviceDetect,
-  osVersion,
+  getUA,
   osName
 } from "react-device-detect";
 
@@ -48,52 +36,52 @@ function App() {
   // Table..
   const columns = [
     {
-      title: 'Name',
+      title: 'Browser Name',
       dataIndex: 'name',
       key: 'name',
       render: text => <a>{text}</a>,
-      width: 150,
-    },
-    {
-      title: 'Browser',
-      dataIndex: 'browser',
-      key: 'browser',
-      width: 100,
-    },
-    {
-      title: 'Ip Address',
-      dataIndex: 'ip',
-      key: 'ip',
-      width: 130,
-    },
-    {
-      title: 'Mac Address',
-      dataIndex: 'mac',
-      key: 'mac',
-      width: 120,
-    },
-    {
-      title: 'Location',
-      dataIndex: 'location',
-      key: 'location',
-      width: 120,
+      ellipsis: true,
     },
     {
       title: 'Device',
       dataIndex: 'device',
       key: 'device',
-      width: 80,
-    },
-    {
-      title: 'Long Column Long Column',
-      dataIndex: 'address',
-      key: 'address 3',
       ellipsis: true,
     },
     {
-      title: 'Long Column',
-      dataIndex: 'address',
-      key: 'address 4',
+      title: 'Country',
+      dataIndex: 'country',
+      key: 'country',
+      ellipsis: true,
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      key: 'location',
+      ellipsis: true,
+    },
+    {
+      title: 'Ip Address',
+      dataIndex: 'ip',
+      key: 'ip',
+      ellipsis: true,
+    },
+    {
+      title: 'Postal Code',
+      dataIndex: 'postal',
+      key: 'postal',
+      ellipsis: true,
+    },
+    {
+      title: 'Latitude',
+      dataIndex: 'latitude',
+      key: 'latitude',
+      ellipsis: true,
+    },
+    {
+      title: 'Country_Code',
+      dataIndex: 'country_code',
+      key: 'country_code',
       ellipsis: true,
     },
   ];
@@ -101,12 +89,14 @@ function App() {
   const data = [
     {
       key: '1',
-      name: details.country_name,
-      browser: 'lol',
-      ip: details.IPv4,
-      mac: '0000.0000',
-      location: 'Comilla',
+      name: browserName,
+      location: details.city,
       device: osName,
+      latitude: details.latitude,
+      country: details.country_name,
+      ip: details.IPv4,
+      country_code: details.country_code,
+      postal: details.postal,
     }
   ];
 
@@ -143,5 +133,19 @@ function App() {
         </Header>
         {/* Header ends here... */}
 
+        {/* Main content starts here... */}
         <Content>
-          <Table columns={columns} dataSource=
+          <Table style={{ paddingTop: "50px" }} columns={columns} dataSource={data} />
+        </Content>
+        {/* Main content ends here... */}
+
+
+        <Footer>
+          <DingdingOutlined style={{fontSize:'42px', color: "green"}} /> <b>Fly to heaven...</b> <BugOutlined style={{fontSize:'18px', color: "blue"}}/>
+        </Footer>
+      </Layout>
+    </div>
+  );
+}
+
+export default App;
