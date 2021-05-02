@@ -3,37 +3,21 @@ import { MailOutlined, AppstoreOutlined, DingdingOutlined, BugOutlined } from '@
 import './App.css';
 import 'antd/dist/antd.css';
 import { useState } from 'react';
-import { isMAC } from 'getmac';
-
-import {
-  osVersion,
-  deviceType,
-  browserVersion,
-  browserName,
-  getUA,
-  osName
-} from "react-device-detect";
+import { browserName, osName } from "react-device-detect";
 
 const { Header, Footer, Content } = Layout;
 const { SubMenu } = Menu;
 
-
-
 function App() {
-  // Location details.. 
+  // Location details api fetch... 
   const [details, setDetails] = useState([]);
   fetch("https://geolocation-db.com/json/56a44b30-a71d-11eb-8c73-0f972c34e9c0")
     .then(res => res.json())
     .then(datas => setDetails(datas))
 
-  // if (isChrome) {
-  //   return <div> This content is unavailable on mobile</div>
-  // }
-  // else {
-  //   return <div> ...content </div>
-  // } 
+  // Table data and UI starts here...
 
-  // Table..
+  // UI...
   const columns = [
     {
       title: 'Browser Name',
@@ -86,6 +70,7 @@ function App() {
     },
   ];
 
+  // Data...
   const data = [
     {
       key: '1',
@@ -100,11 +85,10 @@ function App() {
     }
   ];
 
-  // Table
+  // Table data an UI ends...
 
 
   return (
-    <div>
       <Layout>
         {/*  Header starts here... */}
         <Header>
@@ -139,12 +123,12 @@ function App() {
         </Content>
         {/* Main content ends here... */}
 
-
+        {/* Footer starts here... */}
         <Footer>
-          <DingdingOutlined style={{fontSize:'42px', color: "green"}} /> <b>Fly to heaven...</b> <BugOutlined style={{fontSize:'18px', color: "blue"}}/>
+          <DingdingOutlined style={{ fontSize: '42px', color: "green" }} /> <b>Fly to heaven...</b> <BugOutlined style={{ fontSize: '18px', color: "blue" }} />
         </Footer>
+        {/* Footer end here... */}
       </Layout>
-    </div>
   );
 }
 
