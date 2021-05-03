@@ -15,7 +15,7 @@ function App() {
     .then(res => res.json())
     .then(datas => setDetails(datas))
 
-
+// Data sending to database(mongoDB)...
     const handleSaveInfo = () => {
       fetch('https://still-woodland-66390.herokuapp.com/add', {
         method: 'POST',
