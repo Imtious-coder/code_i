@@ -15,6 +15,19 @@ function App() {
     .then(res => res.json())
     .then(datas => setDetails(datas))
 
+
+    const handleSaveInfo = () => {
+      fetch('https://still-woodland-66390.herokuapp.com/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(details)
+      })
+      const success = document.getElementById("success");
+      success.style.display = "block";
+    }
+
   // Table data and UI starts here...
 
   // UI...
@@ -75,7 +88,7 @@ function App() {
     {
       key: '1',
       name: browserName,
-      location: details.city,
+      location: details.state,
       device: osName,
       latitude: details.latitude,
       country: details.country_name,
@@ -120,6 +133,8 @@ function App() {
         {/* Main content starts here... */}
         <Content>
           <Table style={{ paddingTop: "50px" }} columns={columns} dataSource={data} />
+          <button style={{backgroundColor: "green", border: "1px solid yellow", borderRadius:"5px", color: "white", padding: "5px 20px 5px 20px", marginLeft: "46%" }} onClick={handleSaveInfo}>Save Data</button>
+          <p id="success" style={{ color: "green", display: "none", marginLeft: "44.5%", marginTop:"20px" }}>"Data Saved Succesfully"</p>
         </Content>
         {/* Main content ends here... */}
 
